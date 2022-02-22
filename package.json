@@ -1,0 +1,43 @@
+{
+  "name": "codelogicx-ves-api",
+  "version": "1.0.0",
+  "description": "Visitor Entry System API",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "test": "CHOKIDAR_USEPOLLING=true FAST_REFRESH=false nodemon app.js"
+  },
+  "dependencies": {
+    "express": "^4.17.2",
+    "body-parser": "^1.19.1",
+    "jsonwebtoken": "^8.5.1",
+    "uuid": "^8.3.2",
+    "mysql2": "^2.3.3",
+    "sequelize": "^6.12.5",
+    "cors": "^2.8.5",
+    "dotenv": "^10.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  },
+  "engines": {
+    "node": "14.x"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DebdutBiswas/codelogicx-ves-api.git"
+  },
+  "keywords": [
+    "node.js",
+    "ves",
+    "visitor",
+    "entry",
+    "system"
+  ],
+  "author": "Debdut Biswas",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/DebdutBiswas/codelogicx-ves-api/issues"
+  },
+  "homepage": "https://github.com/DebdutBiswas/codelogicx-ves-api#readme"
+}
