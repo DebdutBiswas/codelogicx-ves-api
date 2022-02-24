@@ -6,7 +6,7 @@
 
 const { Op } = require('sequelize');
 const db = require('../configs/database');
-const { getISOTimeStamp } = require('../utils/timelib');
+const { checkDateFormat, getISOTimeStamp, getISODate } = require('../utils/timelib');
 const initModels = require('../models/initModels');
 
 const { logsModel, visitorsModel } = initModels(db);
@@ -107,8 +107,8 @@ exports.searchLogByParams = async (req, res) => {
         end_date
     } = {
         phone: req.body?.phone ?? req.body.phone ? req.body.phone?.trim?.() : '',
-        start_date: req.body?.start_date ?? req.body.start_date ? req.body.start_date?.trim?.() : '',
-        end_date: req.body?.end_date ?? req.body.end_date ? req.body.end_date?.trim?.() : getISOTimeStamp()
+        start_date: checkDateFormat(req.body?.start_date ?? '') ? getISODate(req.body.start_date.trim?.()) : '',
+        end_date: checkDateFormat(req.body?.end_date ?? '') ? getISODate(req.body.end_date.trim?.()) : getISOTimeStamp()
     };
 
     if (!phone && !start_date && !end_date) {
