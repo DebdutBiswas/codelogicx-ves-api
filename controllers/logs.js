@@ -31,54 +31,148 @@ exports.getAllLogs = async (req, res) => {
 
 exports.addNewLog = async (req, res) => {
     const {
-        visitor_id,
         meet_with,
         checkout_purpose,
         checkout_done,
         entry_time,
-        out_time
+        out_time,
+
+        first_name,
+        last_name,
+        phone,
+        last_met_with,
+        checkout_count,
+        last_checkout_time
     } = {
-        visitor_id: req.body?.visitor_id,
-        meet_with: req.body?.meet_with,
-        checkout_purpose: req.body?.checkout_purpose ?? '',
-        checkout_done: req.body?.checkout_done ?? 0,
-        entry_time: req.body?.entry_time ?? getISOTimeStamp(),
-        out_time: req.body?.out_time ?? null,
+        meet_with: req.body?.meet_with ?? req.body.meet_with ? req.body.meet_with?.trim?.() : '',
+        checkout_purpose: req.body?.checkout_purpose ?? req.body.checkout_purpose ? req.body.checkout_purpose?.trim?.() : '',
+        checkout_done: req.body?.checkout_done ?? req.body.checkout_done ? req.body.checkout_done : 0,
+        entry_time: checkDateFormat(req.body?.entry_time?.trim?.() ?? '') ? getISODate(req.body.entry_time.trim?.()) : getISOTimeStamp(),
+        // out_time: checkDateFormat(req.body?.out_time?.trim?.() ?? '') ? getISODate(req.body.out_time.trim?.()) : null,
+        out_time: null,
+
+        first_name: req.body?.first_name ?? req.body.first_name ? req.body.first_name?.trim?.() : '',
+        last_name: req.body?.last_name ?? req.body.last_name ? req.body.last_name?.trim?.() : '',
+        phone: req.body?.phone ?? req.body.phone ? req.body.phone?.trim?.() : '',
+        last_met_with: req.body?.meet_with ?? '',
+        checkout_count: 0,
+        last_checkout_time: null
     };
 
-    if (!visitor_id || !meet_with) {
+    if (!first_name && !last_name && !phone && !meet_with) {
         return res.status(400).send({
             message: 'Please upload valid JSON format!'
         });
     }
 
-    await logsModel.create({
-        visitor_id,
-        meet_with,
-        checkout_purpose,
-        checkout_done,
-        entry_time,
-        out_time
-    }, { fields: ['visitor_id', 'meet_with', 'checkout_purpose', 'checkout_done', 'entry_time', 'out_time'] })
-    .then(async queryResult => {
-        await logsModel.findOne({where: {id: queryResult.id}})
-        .then(log => {
-            if (log !== null) res.send({'data': log});
-            else {
-                res.status(500).send({
-                    message: 'The log does not exist!'
+    let visitorSearchParams = {
+        first_name,
+        last_name,
+        phone
+    };
+
+    await visitorsModel.findOne({where: visitorSearchParams})
+    .then(async visitor => {
+        if (visitor !== null) {
+            let visitor_id = visitor.dataValues.id;
+            
+            await logsModel.create({
+                visitor_id,
+                meet_with,
+                checkout_purpose,
+                checkout_done,
+                entry_time,
+                out_time
+            }, { fields: ['visitor_id', 'meet_with', 'checkout_purpose', 'checkout_done', 'entry_time', 'out_time'] })
+            .then(async queryResult => {
+                await logsModel.findOne({where: {id: queryResult.id}})
+                .then(log => {
+                    if (log !== null) res.send({'data': log});
+                    else {
+                        res.status(500).send({
+                            message: 'The log does not exist!'
+                        });
+                    }
+                })
+                .catch(err => {
+                    res.status(500).send({
+                        message: err.message || 'Something went wrong while getting the newly created log!'
+                    });
                 });
-            }
-        })
-        .catch(err => {
-            res.status(500).send({
-                message: err.message || 'Something went wrong while getting the newly created log!'
+            })
+            .catch(err => {
+                res.status(500).send({
+                    message: err.message || 'Something went wrong while creating new log!'
+                });
             });
-        });
+        }
+        else {
+            await visitorsModel.create({
+                first_name,
+                last_name,
+                phone,
+                last_met_with,
+                checkout_count,
+                last_checkout_time
+            }, { fields: ['first_name', 'last_name', 'phone', 'last_met_with', 'checkout_count', 'last_checkout_time'] })
+            .then(async queryResult => {
+                await visitorsModel.findOne({where: {id: queryResult.id}})
+                .then(async visitor => {
+                    if (visitor !== null) {
+                        let visitor_id = visitor.dataValues.id;
+            
+                        await logsModel.create({
+                            visitor_id,
+                            meet_with,
+                            checkout_purpose,
+                            checkout_done,
+                            entry_time,
+                            out_time
+                        }, { fields: ['visitor_id', 'meet_with', 'checkout_purpose', 'checkout_done', 'entry_time', 'out_time'] })
+                        .then(async queryResult => {
+                            await logsModel.findOne({where: {id: queryResult.id}})
+                            .then(log => {
+                                if (log !== null) res.send({'data': log});
+                                else {
+                                    res.status(500).send({
+                                        message: 'The log does not exist!'
+                                    });
+                                }
+                            })
+                            .catch(err => {
+                                res.status(500).send({
+                                    message: err.message || 'Something went wrong while getting the newly created log!'
+                                });
+                            });
+                        })
+                        .catch(err => {
+                            res.status(500).send({
+                                message: err.message || 'Something went wrong while creating new log!'
+                            });
+                        });
+                    }
+                    else {
+                        res.status(500).send({
+                            message: 'The visitor does not exist!'
+                        });
+                    }
+                })
+                .catch(err => {
+                    res.status(500).send({
+                        message: err.message || 'Something went wrong while getting the newly created visitor!'
+                    });
+                });
+            })
+            .catch(err => {
+                res.status(500).send({
+                    message: err.message || 'Something went wrong while creating new visitor!'
+                });
+            });
+        }
     })
     .catch(err => {
         res.status(500).send({
-            message: err.message || 'Something went wrong while creating new log!'
+            message: err.message || 'Something went wrong while getting the visitor!'
         });
     });
 };
