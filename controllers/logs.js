@@ -107,8 +107,8 @@ exports.searchLogByParams = async (req, res) => {
         end_date
     } = {
         phone: req.body?.phone ?? req.body.phone ? req.body.phone?.trim?.() : '',
-        start_date: checkDateFormat(req.body?.start_date ?? '') ? getISODate(req.body.start_date.trim?.()) : '',
-        end_date: checkDateFormat(req.body?.end_date ?? '') ? getISODate(req.body.end_date.trim?.()) : getISOTimeStamp()
+        start_date: checkDateFormat(req.body?.start_date?.trim?.() ?? '') ? getISODate(req.body.start_date.trim?.()) : '',
+        end_date: checkDateFormat(req.body?.end_date?.trim?.() ?? '') ? getISODate(req.body.end_date.trim?.()) : getISOTimeStamp()
     };
 
     if (!phone && !start_date && !end_date) {
@@ -127,8 +127,6 @@ exports.searchLogByParams = async (req, res) => {
         };
     }
     if (phone) infoSearchParams = { ...infoSearchParams, phone };
-
-    console.log(logSearchParams ,infoSearchParams);
 
     await logsModel.findAll({where: logSearchParams, order: [['entry_time', 'DESC']], include: [{model: visitorsModel, as: 'visitor_info', where: infoSearchParams, attributes: {exclude: ['id']}}]})
     .then(logs => {
