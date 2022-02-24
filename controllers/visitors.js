@@ -7,6 +7,7 @@
 
 const { Op } = require('sequelize');
 const db = require('../configs/database');
+const { checkDateFormat, getISOTimeStamp, getISODate } = require('../utils/timelib');
 const initModels = require('../models/initModels');
 
 const { visitorsModel, logsModel } = initModels(db);
@@ -38,12 +39,12 @@ exports.addNewVisitor = async (req, res) => {
         checkout_count,
         last_checkout_time
     } = {
-        first_name: req.body?.first_name,
-        last_name: req.body?.last_name,
-        phone: req.body?.phone,
-        last_met_with: req.body?.last_met_with ?? '',
-        checkout_count: req.body?.checkout_count ?? 0,
-        last_checkout_time: req.body?.last_checkout_time ?? null
+        first_name: req.body?.first_name ?? req.body.first_name ? req.body.first_name?.trim?.() : '',
+        last_name: req.body?.last_name ?? req.body.last_name ? req.body.last_name?.trim?.() : '',
+        phone: req.body?.phone ?? req.body.phone ? req.body.phone?.trim?.() : '',
+        last_met_with: req.body?.last_met_with ?? req.body.last_met_with ? req.body.last_met_with?.trim?.() : '',
+        checkout_count: 0,
+        last_checkout_time: null
     };
 
     if (!first_name || !last_name || !phone) {

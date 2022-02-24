@@ -54,7 +54,7 @@ exports.addNewLog = async (req, res) => {
         first_name: req.body?.first_name ?? req.body.first_name ? req.body.first_name?.trim?.() : '',
         last_name: req.body?.last_name ?? req.body.last_name ? req.body.last_name?.trim?.() : '',
         phone: req.body?.phone ?? req.body.phone ? req.body.phone?.trim?.() : '',
-        last_met_with: req.body?.meet_with ?? '',
+        last_met_with: req.body?.meet_with ?? req.body.meet_with ? req.body.meet_with?.trim?.() : '',
         checkout_count: 0,
         last_checkout_time: null
     };
