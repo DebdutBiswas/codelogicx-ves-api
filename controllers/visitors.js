@@ -105,8 +105,8 @@ exports.searchVisitorByParams = async (req, res) => {
         first_name,
         phone
     } = {
-        first_name: req.body?.first_name ?? '',
-        phone: req.body?.phone ?? '',
+        first_name: req.body?.first_name ?? req.body.first_name ? req.body.first_name?.trim?.() : '',
+        phone: req.body?.phone ?? req.body.phone ? req.body.phone?.trim?.() : '',
     };
 
     if (!first_name && !phone) {
@@ -117,10 +117,8 @@ exports.searchVisitorByParams = async (req, res) => {
 
     let searchParams = {};
 
-    if (first_name) searchParams = { ...searchParams, first_name: first_name?.trim() };
-    if (phone) searchParams = { ...searchParams, phone: phone?.trim() };
-
-    console.log(searchParams);
+    if (first_name) searchParams = { ...searchParams, first_name: first_name };
+    if (phone) searchParams = { ...searchParams, phone: phone };
 
     await visitorsModel.findAll({where: searchParams, order: [['id', 'DESC']]})
     .then(visitors => {
