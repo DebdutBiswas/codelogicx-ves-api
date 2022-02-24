@@ -1,3 +1,8 @@
+
+const checkDateFormat = (dateTimeStr) => {
+    return isNaN(Date.parse(dateTimeStr)) ? false : true;
+};
+
 const getTimeStamp = (isTime) => {
     const currentDateTime = new Date();
     const dateString = currentDateTime.toISOString().slice(0,10);
@@ -16,6 +21,8 @@ const getISOTimeStamp = () => {
 };
 
 const getDateDiff = (prevDateStr, nextDateStr, isNegate = false) => {
+    if (!checkDateFormat(prevDateStr) || !checkDateFormat(nextDateStr)) return NaN;
+
     const prevDate = new Date(prevDateStr).getTime();
     const nextDate = new Date(nextDateStr).getTime();
     
@@ -25,14 +32,25 @@ const getDateDiff = (prevDateStr, nextDateStr, isNegate = false) => {
     return Math.round(microSecondsDiff / (1000 * 60 * 60  * 24));
 };
 
+const getISODate = (dateTimeStr) => {
+    if (!checkDateFormat(dateTimeStr)) return '';
+
+    const dateTime = new Date(dateTimeStr);
+    return dateTime.toISOString();
+};
+
 const daysDueCheck = (dueDateStr) => {
+    if (!checkDateFormat(dueDateStr)) return;
+
     const dueDate = new Date(dueDateStr);
     return (getDateDiff(dueDate, getISOTimeStamp(), true) < 0) ? true : false;
 };
 
 module.exports = {
+    checkDateFormat,
     getTimeStamp,
     getISOTimeStamp,
     getDateDiff,
+    getISODate,
     daysDueCheck
 };
