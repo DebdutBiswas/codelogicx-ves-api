@@ -9,7 +9,7 @@ module.exports = (sequelize) => {
   const visitorsModel = _visitorsModel(sequelize, DataTypes);
   const logsModel = _logsModel(sequelize, DataTypes);
 
-  logsModel.belongsTo(visitorsModel, { as: "visitor", foreignKey: "visitor_id"});
+  logsModel.belongsTo(visitorsModel, { as: "visitor_info", foreignKey: "visitor_id"});
   visitorsModel.hasMany(logsModel, { as: "visitor_logs", foreignKey: "visitor_id"});
 
   // visitor_log.belongsTo(visitor_info, { as: "visitor", foreignKey: "visitor_id"});
