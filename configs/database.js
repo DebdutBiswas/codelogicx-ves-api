@@ -23,5 +23,6 @@ module.exports = new Sequelize(dbDatabase, dbUser, dbPassword, {
         acquire: 30000,
         idle: 20000
     }
-  }
+  },
+  logging: process.env.NODE_ENV === 'production' ? false : console.log
 });
