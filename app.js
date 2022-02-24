@@ -3,6 +3,8 @@ const express = require('express');
 const cors = require('cors');
 const db = require('./configs/database');
 
+process.env.NODE_ENV = process.env.NODE_ENV ?? 'development';
+
 let authMiddleware = require('./middlewares/auth');
 
 const authRouter = require('./routes/auth');
