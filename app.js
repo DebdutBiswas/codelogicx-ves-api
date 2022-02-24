@@ -1,5 +1,5 @@
 const express = require('express');
-// const bodyParser = require('body-parser');
+const bodyParser = require('body-parser');
 const cors = require('cors');
 const db = require('./configs/database');
 
@@ -14,6 +14,7 @@ const logsRouter = require('./routes/logs');
 
 db.authenticate().then(() => {
     console.log('Database connected...');
+    // Create database tables if not exists
     // (async () => await db.sync())();
 }).catch(err => {
     console.log('Error: ' + err);
@@ -27,10 +28,10 @@ const app = express();
 process.env.NODE_ENV === 'production' ? app.set('env', 'production') : app.set('env', 'development');
 
 // Mddlewares
-// app.use(bodyParser.urlencoded({ extended: true }));
-// app.use(bodyParser.json());
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+// app.use(express.urlencoded({ extended: true }));
+// app.use(express.json());
 app.use(cors({
     origin: '*'
 }));
