@@ -106,9 +106,9 @@ exports.searchLogByParams = async (req, res) => {
         start_date,
         end_date
     } = {
-        phone: req.body?.phone ?? '',
-        start_date: req.body?.start_date ?? '',
-        end_date: req.body?.end_date ?? '',
+        phone: req.body?.phone ?? req.body.phone ? req.body.phone?.trim?.() : '',
+        start_date: req.body?.start_date ?? req.body.start_date ? req.body.start_date?.trim?.() : '',
+        end_date: req.body?.end_date ?? req.body.end_date ? req.body.end_date?.trim?.() : getISOTimeStamp()
     };
 
     if (!phone && !start_date && !end_date) {
@@ -123,10 +123,10 @@ exports.searchLogByParams = async (req, res) => {
     if (start_date && end_date) {
         logSearchParams = {
             ...logSearchParams,
-            entry_time: {[Op.between]: [start_date?.trim(), end_date?.trim()]}
+            entry_time: {[Op.between]: [start_date, end_date]}
         };
     }
-    if (phone) infoSearchParams = { ...infoSearchParams, phone: phone?.trim() };
+    if (phone) infoSearchParams = { ...infoSearchParams, phone: phone };
 
     console.log(logSearchParams ,infoSearchParams);
 
