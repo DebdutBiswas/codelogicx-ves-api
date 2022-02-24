@@ -123,17 +123,17 @@ exports.searchVisitorByParams = async (req, res) => {
     console.log(searchParams);
 
     await visitorsModel.findAll({where: searchParams, order: [['id', 'DESC']]})
-    .then(visitor => {
-        if (visitor !== null) res.send({'data': visitor});
+    .then(visitors => {
+        if (visitors !== null) res.send({'data': visitors});
         else {
             res.status(500).send({
-                message: 'The visitor does not exist!'
+                message: 'No visitors exist!'
             });
         }
     })
     .catch(err => {
         res.status(500).send({
-            message: err.message || 'Something went wrong while getting the visitor!'
+            message: err.message || 'Something went wrong while getting list of visitors!'
         });
     });
 };
