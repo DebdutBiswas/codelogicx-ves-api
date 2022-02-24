@@ -126,7 +126,7 @@ exports.searchLogByParams = async (req, res) => {
             entry_time: {[Op.between]: [start_date, end_date]}
         };
     }
-    if (phone) infoSearchParams = { ...infoSearchParams, phone: phone };
+    if (phone) infoSearchParams = { ...infoSearchParams, phone };
 
     console.log(logSearchParams ,infoSearchParams);
 

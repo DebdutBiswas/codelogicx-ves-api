@@ -117,8 +117,8 @@ exports.searchVisitorByParams = async (req, res) => {
 
     let searchParams = {};
 
-    if (first_name) searchParams = { ...searchParams, first_name: first_name };
-    if (phone) searchParams = { ...searchParams, phone: phone };
+    if (first_name) searchParams = { ...searchParams, first_name };
+    if (phone) searchParams = { ...searchParams, phone };
 
     await visitorsModel.findAll({where: searchParams, order: [['id', 'DESC']]})
     .then(visitors => {
