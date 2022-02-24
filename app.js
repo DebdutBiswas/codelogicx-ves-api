@@ -52,7 +52,7 @@ app.use('/auth', authRouter);
 // app.use(authMiddleware);
 
 // Bypass auth middlewares (debug)
-authMiddleware = (req, res, next) => { next() };
+process.env.NODE_ENV === 'debug' ? authMiddleware = (req, res, next) => { next() } : console.log({ NODE_ENV: process.env.NODE_ENV });
 
 // App routes
 app.use('/users', authMiddleware, usersRouter);
