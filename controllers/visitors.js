@@ -101,7 +101,41 @@ exports.getVisitorById = async (req, res) => {
 };
 
 exports.searchVisitorByParams = async (req, res) => {
+    const {
+        first_name,
+        phone
+    } = {
+        first_name: req.body?.first_name ?? '',
+        phone: req.body?.phone ?? '',
+    };
 
+    if (!first_name && !phone) {
+        return res.status(400).send({
+            message: 'Please upload valid JSON format!'
+        });
+    }
+
+    let searchParams = {};
+
+    if (first_name) searchParams = { ...searchParams, first_name: first_name?.trim() };
+    if (phone) searchParams = { ...searchParams, phone: phone?.trim() };
+
+    console.log(searchParams);
+
+    await visitorsModel.findAll({where: searchParams, order: [['id', 'DESC']]})
+    .then(visitor => {
+        if (visitor !== null) res.send({'data': visitor});
+        else {
+            res.status(500).send({
+                message: 'The visitor does not exist!'
+            });
+        }
+    })
+    .catch(err => {
+        res.status(500).send({
+            message: err.message || 'Something went wrong while getting the visitor!'
+        });
+    });
 };
 
 exports.checkoutVisitor = async (req, res) => {
