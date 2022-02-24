@@ -1,0 +1,41 @@
+version: '2'
+
+services:
+
+  codelogicxvesapi:
+    image: codelogicx-ves-api
+    environment:
+      - DB_HOST=codelogicxvesdb
+      - DB_PORT=3306
+      - DB_USER=codelogicxves
+      - DB_PASS=codelogicxves@12345
+      - DB_DBASE=codelogicxves
+    build:
+      context: .
+      dockerfile: codelogicx-ves-api.Dockerfile
+    ports:
+      - "3000:3000"
+    depends_on:
+      - "codelogicxvesdb"
+    restart: "on-failure"
+    volumes:
+      - codelogicxvesapi-data:/home/node/app
+
+  codelogicxvesdb:
+    image: mysql:8.0.27
+    command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci --default-authentication-plugin=mysql_native_password --init-file /docker-entrypoint-initdb.d/dummy.sql
+    environment:
+      - MYSQL_ROOT_PASSWORD=root@12345
+      - MYSQL_DATABASE=codelogicxves
+      - MYSQL_USER=codelogicxves
+      - MYSQL_PASSWORD=codelogicxves@12345
+    ports:
+      - "3306:3306"
+    restart: "on-failure"
+    volumes:
+      - codelogicxvesdb-data:/var/lib/mysql
+      - ./schemas/dummy.sql:/docker-entrypoint-initdb.d/dummy.sql
+
+volumes:
+  codelogicxvesdb-data:
+  codelogicxvesapi-data:
