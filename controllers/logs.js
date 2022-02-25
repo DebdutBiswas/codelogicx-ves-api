@@ -46,7 +46,8 @@ exports.addNewLog = async (req, res) => {
     } = {
         meet_with: req.body?.meet_with ?? req.body.meet_with ? req.body.meet_with?.trim?.() : '',
         checkout_purpose: req.body?.checkout_purpose ?? req.body.checkout_purpose ? req.body.checkout_purpose?.trim?.() : '',
-        checkout_done: req.body?.checkout_done ?? req.body.checkout_done ? req.body.checkout_done : 0,
+        // checkout_done: req.body?.checkout_done ?? req.body.checkout_done ? req.body.checkout_done : 0,
+        checkout_done: 0,
         entry_time: checkDateFormat(req.body?.entry_time?.trim?.() ?? '') ? getISODate(req.body.entry_time.trim?.()) : getISOTimeStamp(),
         // out_time: checkDateFormat(req.body?.out_time?.trim?.() ?? '') ? getISODate(req.body.out_time.trim?.()) : null,
         out_time: null,
