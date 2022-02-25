@@ -178,7 +178,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \r\n}",
+							"raw": "{\r\n    \"id\": \"2\",\r\n    \"out_time\": \"2022-02-25T02:00:00.000Z\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -231,7 +231,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"first_name\": \"Gopal\",\r\n    \"last_name\": \"Rai\",\r\n    \"phone\": \"9856037840\",\r\n    \"meet_with\": \"Debdut Biswas\",\r\n    \"checkout_purpose\": \"Personal\",\r\n    \"checkout_done\": 1,\r\n    \"entry_time\": \"2022-02-24T23:05:40.000Z\"\r\n}",
+							"raw": "{\r\n    \"first_name\": \"Gopal\",\r\n    \"last_name\": \"Rai\",\r\n    \"phone\": \"9856037840\",\r\n    \"meet_with\": \"Debdut Biswas\",\r\n    \"checkout_purpose\": \"Personal\",\r\n    \"entry_time\": \"2022-02-24T23:05:40.000Z\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -309,7 +309,7 @@
 		"bearer": [
 			{
 				"key": "token",
-				"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwidXNlcm5hbWUiOiJkZWJkdXQiLCJuYW1lIjoiRGViZHV0IiwiYWN0aXZlIjp0cnVlLCJyb2xlIjoxLCJyZWdfYnkiOjEsInJlZ19kYXRlIjoiMjAyMi0wMi0yM1QyMDo1OToyOS4wMDBaIiwiaWF0IjoxNjQ1NzI5MTQ1LCJleHAiOjE2NDU3MjkyMDV9.e377ZU-L2Mfo9f_js0_A2eS5_CG5yYy13wuwFt8t1Tc",
+				"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwidXNlcm5hbWUiOiJkZWJkdXQiLCJuYW1lIjoiRGViZHV0IiwiYWN0aXZlIjp0cnVlLCJyb2xlIjoxLCJyZWdfYnkiOjEsInJlZ19kYXRlIjoiMjAyMi0wMi0yM1QyMDo1OToyOS4wMDBaIiwiaWF0IjoxNjQ1Nzc0NjQ3LCJleHAiOjE2NDg0MDI2NDd9.n8HuGQ9coDcmdQRldHu_NMbFAXIWHOqp7IiJFTpqHyg",
 				"type": "string"
 			}
 		]
