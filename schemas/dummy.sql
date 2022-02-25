@@ -59,12 +59,12 @@ CREATE TABLE `visitor_info` (
 --
 
 INSERT INTO `visitor_info` (`id`, `first_name`, `last_name`, `phone`, `reg_date`, `last_met_with`, `checkout_count`, `last_checkout_time`) VALUES
-(1, 'Debdut', 'Biswas', '7003153094', '2022-02-23 21:44:32', 'Aparna Sen', 0, '2022-02-23 21:44:32'),
+(1, 'Debdut', 'Biswas', '7003153094', '2022-02-23 21:44:32', 'Aparna Sen', 1, '2022-02-23 21:44:32'),
 (2, 'Ramesh', 'Das', '7003853094', '2022-02-23 21:45:50', 'Sandip Paul', 0, NULL),
 (3, 'Pradyut', 'Paul', '9876037840', '2022-02-23 22:14:28', 'Asit Pal', 1, '2022-02-23 16:14:32'),
-(4, 'Gopal', 'Rai', '9856037840', '2022-02-23 22:15:28', 'Asit Pal', 0, '2022-02-23 16:14:32'),
+(4, 'Gopal', 'Rai', '9856037840', '2022-02-23 22:15:28', 'Asit Pal', 1, '2022-02-25 02:00:00'),
 (5, 'Gultu', 'Shill', '9856037840', '2022-02-23 22:44:32', 'Asit Pal', 0, NULL),
-(13, 'Roddur', 'Das', '7003413094', '2022-02-24 18:18:24', 'Chandak Biswas', 0, NULL);
+(6, 'Roddur', 'Das', '7003413094', '2022-02-24 18:18:24', 'Chandak Biswas', 0, NULL);
 
 -- --------------------------------------------------------
 
@@ -87,14 +87,13 @@ CREATE TABLE `visitor_log` (
 --
 
 INSERT INTO `visitor_log` (`id`, `visitor_id`, `meet_with`, `checkout_purpose`, `checkout_done`, `entry_time`, `out_time`) VALUES
-(1, 2, 'Ashit Pal', 'To return back borrowed books', 0, '2022-02-23 23:06:44', NULL),
-(2, 4, 'Pancham Sarkar', 'Personal cause', 0, '2022-02-23 23:06:44', NULL),
-(4, 5, 'Aprna Sen', 'Personal', 1, '2022-02-23 23:05:40', '2022-02-23 23:06:44'),
-(5, 4, 'Pranto Sen', 'Personal', 1, '2022-02-23 23:05:40', '2022-02-23 23:06:44'),
-(6, 2, 'Subham Das', 'Personal', 1, '2022-02-23 23:05:40', '2022-02-23 23:05:45'),
-(14, 2, 'Manik Pal', 'Personal', 1, '2022-02-23 23:05:40', '2022-02-23 23:05:45'),
-(28, 13, 'Chandak Biswas', 'Personal', 1, '2022-02-24 23:05:40', NULL),
-(29, 4, 'Debdut Biswas', 'Personal', 1, '2022-02-24 23:05:40', NULL);
+(1, 2, 'Ashit Pal', 'To return back borrowed books', 1, '2022-02-23 23:06:44', '2022-02-25 06:27:25'),
+(2, 4, 'Pancham Sarkar', 'Personal cause', 1, '2022-02-23 23:06:44', '2022-02-25 02:00:00'),
+(3, 5, 'Aprna Sen', 'Personal', 1, '2022-02-23 23:05:40', '2022-02-25 01:00:00'),
+(4, 4, 'Pranto Sen', 'Personal', 1, '2022-02-23 23:05:40', '2022-02-23 23:06:44'),
+(5, 2, 'Subham Das', 'Personal', 1, '2022-02-23 23:05:40', '2022-02-23 23:05:45'),
+(6, 2, 'Manik Pal', 'Personal', 0, '2022-02-23 23:05:40', NULL),
+(7, 6, 'Chandak Biswas', 'Personal', 0, '2022-02-24 23:05:40', NULL);
 
 --
 -- Indexes for dumped tables
@@ -131,19 +130,19 @@ ALTER TABLE `visitor_log`
 -- AUTO_INCREMENT for table `admin_auth`
 --
 ALTER TABLE `admin_auth`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `visitor_info`
 --
 ALTER TABLE `visitor_info`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `visitor_log`
 --
 ALTER TABLE `visitor_log`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- Constraints for dumped tables
