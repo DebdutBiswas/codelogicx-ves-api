@@ -55,6 +55,13 @@ To be added later via heroku docker deploy
 ```
 - Now you are ready to test the API from Postman
 - All the required API keys and test parameters are with in the Postman project
+- If required to check user authentication then here credentials below:
+```json
+{
+    "username": "admin",
+    "password": "admin@123"
+}
+```
 
 ## Database Schema Design:
 Here is a relationship diagram of various database tables:
