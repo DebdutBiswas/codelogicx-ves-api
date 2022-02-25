@@ -55,7 +55,7 @@ To be added later via heroku docker deploy
 ```
 - Now you are ready to test the API from Postman
 - All the required API keys and test parameters are with in the Postman project
-- If required to check user authentication then here credentials below:
+- If required to check user authentication then use credentials given below:
 ```json
 {
     "username": "admin",
