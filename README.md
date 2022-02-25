@@ -11,7 +11,9 @@ To be added later via heroku docker deploy
 
 ## Manual setup:
 ### Install required node modules
-> npm install
+```bash
+  npm install
+```
 
 ### Databse setup
 #### Create database user and database
@@ -42,7 +44,9 @@ To be added later via heroku docker deploy
 
 ## How to run the code?
 ### First, start the server
-> npm start
+```bash
+  npm start
+```
 
 ### Test REST APIs
 - Import Postman REST API test project to Postman from:
