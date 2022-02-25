@@ -30,7 +30,7 @@ exports.getToken = async (req, res) => {
                 }
 
                 if (hashCheckResult) {
-                    const accessToken = generateAccessToken(userData, '60s');
+                    const accessToken = generateAccessToken(userData, '1d');
                     const refreshToken = generateRefreshToken(userData);
         
                     res.send({accessToken, refreshToken});
